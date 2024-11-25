@@ -1,6 +1,11 @@
 const choices = ["rock", "paper", "scissor"];
 const images = document.querySelectorAll(".choices img");
 const resultDiv = document.querySelector(".result");
+const playerScoreSpan = document.getElementById("playerScore");
+const computerScoreSpan = document.getElementById("computerScore");
+
+let playerScore = 0;
+let computerScore = 0;
 
 function GetComputerChoice() {
   const randomNumber = Math.floor(Math.random() * choices.length);
@@ -17,8 +22,10 @@ function DetermineWinner(playerChoice, compChoice) {
     (playerChoice === "paper" && compChoice === "rock") ||
     (playerChoice === "scissor" && compChoice === "paper")
   ) {
+    playerScore++;
     return "You win";
   }
+  computerScore++;
   return "You lose";
 }
 
@@ -29,6 +36,8 @@ images.forEach((image) => {
 
     const winnerMessage = DetermineWinner(playerChoice, computerChoice);
 
+    playerScoreSpan.textContent = playerScore;
+    computerScoreSpan.textContent = computerScore;
     resultDiv.innerHTML = `
             <p>You chose: <strong>${playerChoice}</strong></p>
             <p>Computer chose: <strong>${computerChoice}</strong></p>
